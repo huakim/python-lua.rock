@@ -11,7 +11,7 @@ setup(
       packages = ['lua/rock'],
       entry_points = {
          'console_scripts': [
-            'create_luarock = lua.rock:main'
+            'create_luarock = lua.rock:main_create_rock'
          ],
       },
       install_requires=['luadata.luatable'],
