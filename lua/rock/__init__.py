@@ -40,7 +40,9 @@ def create_rock(path, rockspec, dir, filename):
     package = globs['package']
     if not filename:
         filename = get_filename(path, package, version)
-    with ZipFile(dir.joinpath(filename), 'w', ZIP_DEFLATED) as zipf:
+    rockfile = dir.joinpath(filename).absolute()
+    rockfile.parent.mkdir(parents=True, exist_ok=True)
+    with ZipFile(rockfile, 'w', ZIP_DEFLATED) as zipf:
         table = LuaTable()
         for file, parts in list_rock_directory(path):
             zipf.write(file, zippath(file, parts))
