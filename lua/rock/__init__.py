@@ -7,6 +7,16 @@ import argparse
 from pathlib import Path
 root='rock_manifest'
 
+architectures={
+'i386': 'x86',
+'i486': 'x86',
+'i586': 'x86',
+'i686': 'x86',
+'s390x': 's390',
+'armv7l': 'arm',
+'armv6l': 'arm'
+}
+
 def list_rock_directory(path):
     path_pool = [path]
     while path_pool:
@@ -57,6 +67,7 @@ def get_filename(path, package, version):
     libdir = path.joinpath('lib')
     if libdir.is_dir() and next(libdir.iterdir(), False):
         machine = platform.machine()
+        machine = architectures.get(machine, machine)
     else:
         machine = 'all'
     return f'{package}-{version}.{system}-{machine}.rock'.lower()
